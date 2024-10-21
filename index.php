@@ -60,7 +60,7 @@
 	<!-- Service 3 - Bootstrap Brain Component -->
 <section class="py-5 py-xl-8">
     <div class="container" id="services">
-      <h1>services & timgis</h1>
+      <h1>services & timgis for daily and sundays</h1>
       <div class="row justify-content-md-center">
         <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6" data-aos="fade-up">
           <h2 class="mb-4 display-5 text-center">Mass and Prayer Times for infant jesus</h2>
