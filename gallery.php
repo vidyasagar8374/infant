@@ -5,7 +5,7 @@
   <!-- Breadcum -->
   <div class="container-fluid contact-header shadow">
           <div class="breadcum-badge p-3 pt-5 pb-5 text-center">
-            <h3>Gallery</h3>
+            <h3>Gallery for Infant Jesus</h3>
           </div>
       </div>
   <!-- End Breadcum -->
