@@ -10,14 +10,17 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+    # Checkout the repository code
     - name: Checkout code
       uses: actions/checkout@v3
 
+    # Deploy to InfinityFree using FTP
     - name: FTP Deploy
       uses: SamKirkland/FTP-Deploy-Action@v4.3.0
       with:
-        ftp-server: ${{ secrets.SERVER }}
-        ftp-username: ${{ secrets.USERNAME }}
-        ftp-password: ${{ secrets.PASSWORD }}
-        local-dir: ./  # Assuming the website files are in the root of your repository
-        server-dir: /htdocs/  # The directory on your server where the files should go
+        server: ${{ secrets.FTP_SERVER }}      # FTP server address
+        username: ${{ secrets.FTP_USERNAME }}  # FTP username
+        password: ${{ secrets.FTP_PASSWORD }}  # FTP password
+        protocol: ftp                          # Ensure FTP protocol is used
+        local-dir: ./                          # The local directory (root of your repository)
+        server-dir: /htdocs/                   # The directory on the server (htdocs in InfinityFree)
