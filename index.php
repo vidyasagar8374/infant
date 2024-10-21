@@ -63,7 +63,7 @@
       
       <div class="row justify-content-md-center">
         <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6" data-aos="fade-up">
-          <h2 class="mb-4 display-5 text-center">Mass and Prayer Times</h2>
+          <h2 class="mb-4 display-5 text-center">Mass and Prayer Times for church</h2>
           <p class="text-secondary mb-5 text-center">We are dedicated to delivering exceptional services that drive success and transform your business. With a commitment to excellence, we take pride in offering a comprehensive range of services.</p>
           <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
         </div>
