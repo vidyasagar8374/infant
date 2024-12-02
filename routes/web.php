@@ -5,10 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\adminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InpageController;
+use App\Http\Controllers\PaymentController;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::post('/payments/initiate', [PaymentController::class, 'initiatePayment'])->name('payments.initiate');
+Route::post('/payments/callback', [PaymentController::class, 'handleCallback'])->name('payments.callback');
+Route::post('/payments/webhookhandler', [PaymentController::class, 'webhookhandler'])->name('payments.webhookhandler');
 
 Route::controller(InpageController::class)->group(function(){
     Route::get('/',  'home')->name('home.index'); // dashboard.admin
