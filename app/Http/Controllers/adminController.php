@@ -7,7 +7,7 @@ use App\Models\Banner;
 use App\Models\Post;
 use App\Models\User;
 use App\Models\Contactlist;
-use App\Models\youtubePost;
+use App\Models\YoutubePost;
 use App\Models\Parishprist;
 use Illuminate\Support\Facades\Crypt;
 use DB;
