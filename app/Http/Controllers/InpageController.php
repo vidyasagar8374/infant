@@ -15,6 +15,7 @@ class InpageController extends Controller
 {
     //inpage controller
     // add changes
+    //git changes
     public function home(){
         //post,banners,prists,user
         $posts = Post::where('is_active',1)->orderBy('date', 'asc')->get();
