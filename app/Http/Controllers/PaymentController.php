@@ -34,7 +34,7 @@ class PaymentController extends Controller
             'meta_data' => json_encode(['order_id' => $order->id]),
         ]);
 
-        return view('payments.pay', [
+        return view('dashboard.massrequests.pay', [
             'order_id' => $order->id,
             'amount' => $amount,
             'reference_id' => $referenceId,
@@ -120,12 +120,11 @@ class PaymentController extends Controller
         $paymentReference = PaymentReference::where('reference_id', $referenceId)->first();
 
         if ($paymentReference) {
-            $paymentReference->update([
-                'status' => $status,
-                'payment_id' => $paymentEntity['id'],
-                'amount_paid' => $paymentEntity['amount'] / 100, // Convert from paise to rupees
-                'payment_method' => $paymentEntity['method'], // e.g., card, netbanking
-            ]);
+            if($paymentReference->status != 'completed'){
+                $paymentReference->update([
+                    'status' => 'completed',
+                ]);
+            }
             \Log::info("Payment status updated to {$status} for reference ID {$referenceId}.");
         } else {
             \Log::warning("Payment reference not found for order ID: {$referenceId}.");

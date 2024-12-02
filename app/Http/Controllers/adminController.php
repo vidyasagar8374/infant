@@ -516,6 +516,9 @@ class adminController extends Controller
           
 
         }
+        public function massrequest(){
+            return view('dashboard/massrequests/massrequest');
+        }
     private function extractYoutubeId($url)
     {
         preg_match('/(?:https?:\/\/)?(?:www\.)?(?:youtube\.com\/(?:[^\/\n\s]+\/\S+\/|(?:v|e(?:mbed)?)\/|\S*?[?&]v=)|youtu\.be\/)([a-zA-Z0-9_-]{11})/', $url, $matches);

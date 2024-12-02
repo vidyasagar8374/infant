@@ -1,6 +1,6 @@
-@extends('dashboard.basedashbord')
+@extends('dashboard.basedashboard')
 
-@section('title', 'Mass Request')
+@section('title', 'Bannerlist')
 
 @section('content')
     <div class="container">

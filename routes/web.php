@@ -33,6 +33,7 @@ Route::prefix('admin')->middleware('auth')->group(function () {
         Route::post('/updatebanner',  'updatebanner')->name('admin.banners.update');  // update banner
         Route::get('/bannerview/{id}',  'bannerview')->name('admin.banners.view');  // update banner
         Route::delete('/banners/delete/{id}', 'destroybanner')->name('admin.banners.delete');  // delete banner
+        Route::get('/massrequest',  'massrequest')->name('dashboard.massrequest'); // dashboard.admin
 
 
         // create posts
