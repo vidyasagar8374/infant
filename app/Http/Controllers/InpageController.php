@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Models\Banner;
 use App\Models\ContactList;
-use App\Models\YouTubePost;
+use App\Models\YoutubePost;
 use App\Models\Parishprist;
 use DB;
 
@@ -43,7 +43,7 @@ class InpageController extends Controller
 
     public function telecast(){
         // Select all columns from the YouTubePost table along with year and month
-        $listdata = YouTubePost::select('youtube_posts.*', DB::raw('YEAR(date) as year'), DB::raw('MONTH(date) as month'))
+        $listdata = YoutubePost::select('youtube_posts.*', DB::raw('YEAR(date) as year'), DB::raw('MONTH(date) as month'))
         ->orderBy(DB::raw('YEAR(date)'), 'desc')
         ->orderBy(DB::raw('MONTH(date)'), 'desc')
         ->get();
