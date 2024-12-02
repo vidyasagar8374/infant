@@ -11,6 +11,7 @@ use App\Models\Parishprist;
 use DB;
 
 
+
 class InpageController extends Controller
 {
     //inpage controller
