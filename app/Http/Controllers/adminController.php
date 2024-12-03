@@ -465,6 +465,7 @@ class adminController extends Controller
 
         }
         public function updateprist(Request $request){
+            // added some changes
             $id = $request->id;
             
             $updateprist = Parishprist::findOrFail($id);
