@@ -28,6 +28,7 @@ class adminController extends Controller
 
 
     public function dashboard(){
+        // update changes 
         $posts = Post::count();
         // dd($posts);
         $users = User::count();
