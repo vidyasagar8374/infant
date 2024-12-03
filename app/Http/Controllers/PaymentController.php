@@ -9,7 +9,7 @@ class PaymentController extends Controller
 {
     public function initiatePayment(Request $request)
     {
-        $request->validate([
+        $request->validate([    
             'amount' => 'required|numeric|min:1',
         ]);
 

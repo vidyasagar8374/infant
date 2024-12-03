@@ -15,7 +15,10 @@
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
-                    "X-CSRF-TOKEN": "{{ csrf_token() }}"
+                    "X-CSRF-TOKEN": "{{ csrf_token() }}",
+                    razorpay_signature: response.razorpay_signature,
+                    razorpay_payment_id: response.razorpay_payment_id,
+                    razorpay_order_id: response.razorpay_order_id,
                 },
                 body: JSON.stringify({
                     razorpay_payment_id: response.razorpay_payment_id,
