@@ -68,6 +68,7 @@ class PaymentController extends Controller
         }
     public function webhookhandler(Request $request)
     {
+        dd($request);
         $payload = $request->getContent(); // Raw webhook payload
         $razorpaySignature = $request->header('X-Razorpay-Signature'); // Webhook signature header
         $webhookSecret = env('RAZORPAY_WEBHOOK_SECRET'); // Set this in your .env file
