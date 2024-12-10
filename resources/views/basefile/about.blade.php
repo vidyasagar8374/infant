@@ -93,12 +93,20 @@
         <section class="parishlist-swiper">
                  <!-- swiper -->
                  <div class="swiper-container-wrapper" style="position: relative;">
-                 <div class="swiper-button-next"></div>
-                <div class="swiper-button-prev"></div>
-                <swiper-container init="false" class="mySwiper">
+                 <swiper-container 
+                    navigation="true" 
+                    space-between="20" 
+                    speed="500" 
+                    loop="true" 
+                    css-mode="true" 
+                    breakpoints='{
+                        "320": {"slidesPerView": 1},
+                        "640": {"slidesPerView": 2},
+                        "1024": {"slidesPerView": 4}
+                    }'>
                     @foreach($parishlists as $parish)
                     <swiper-slide> 
-                    <div class="card" style="width: 15rem;">
+                    <div class="card">
                     <img class="card-img-top object-fit-fill" src="{{ asset($parish->profile) }}" alt="{{ $parish->name }}">
                         <div class="card-body bg-light">
                             <p class="card-text text-center">{{  $parish->name }}</p>
@@ -106,9 +114,8 @@
                         </div>
                         </div>
                 </swiper-slide>
-       
                   @endforeach
-                    </swiper-container>
+            </swiper-container>
                   
                 </div>
     <!-- swiper -->

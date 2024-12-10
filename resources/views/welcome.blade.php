@@ -4,7 +4,7 @@
 @section('content')
  <div class="content">
         <!-- Carousel -->
-        <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="2000">
+        <div id="churchCarousel" class="carousel slide" data-bs-ride="carousel" data-bs-interval="3000">
     <div class="carousel-inner">
         @foreach($banners as $key => $banner)
         <div class="carousel-item {{ $key == 0 ? 'active' : '' }}">
@@ -13,8 +13,8 @@
             @else
             <p></p>
             @endif
-            <div class="carousel-caption d-none d-md-block">
-                <h5>{{ $banner->title }}</h5>
+            <div class="carousel-caption">
+                <h1>{{ $banner->title }}</h1>
                 <p>{{ $banner->description }}</p>   
             </div>
         </div>
@@ -33,11 +33,11 @@
 
         <!-- ==============mass feature =====================-->
 	<!-- Service 3 - Bootstrap Brain Component -->
-<section class="py-5 py-xl-8">
+<section class="pt-5 pb-5">
     <div class="container" id="services">
       <div class="row justify-content-md-center">
         <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6" data-aos="fade-up">
-          <h2 class="mb-4 display-5 text-center">Mass and Prayer Timings</h2>
+          <h2 class="mb-4 text-center">Mass and Prayer Timings</h2>
           <p class="text-secondary mb-5 text-center">We are dedicated to delivering exceptional services that drive success and transform your business. With a commitment to excellence, we take pride in offering a comprehensive range of services.</p>
           <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
         </div>
@@ -100,97 +100,10 @@
     </div>
   </section>
 
-  <!-- album song -->
-  <section>
-  <div class="container" style="background-image: url('{{ asset('inpageimages/album-song-infant-jesus.jpg') }}'); background-size: cover; background-position: center; height: 400px; display: flex; align-items: center; justify-content: center; position: relative;">
-    <!-- Dark Overlay for Better Text Readability -->
-    <div class="overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5);"></div>
-
-    <!-- Content Area with Author Details and Play Icon -->
-    <div class="content text-center text-white" style="position: relative; z-index: 1;">
-        <!-- Author Information -->
-        <h4>Album Song</h4>
-        <h5>Written by Fr.David Koppara</h5>
-        <p>Brief description about the author goes here.</p>
-        
-        <!-- Play Button Icon -->
-        <button type="button" class="play-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#videoModal">
-        <i class="bi bi-play-fill"></i>
-    </button>
-    </div>
-</div>
-
-    <!-- Video Modal -->
-    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="videoModalLabel">Album Song Video</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <div class="ratio ratio-16x9">
-                    <iframe width="560" height="315"  id="youtubeVideo"  src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-@if(count($posts))
-<section class="comingup-events">
-  <div class="container pt-3 pb-3">
-    <h3 class="activity-text">Upcoming Events</h3>
-  </div>
-<div class="container">
-<div class="row">
-  @foreach($posts as $post)
-    <div class="col-lg-4">
-        <div class="card card-margin" data-aos="zoom-in" data-aos-duration="2000">
-            <div class="card-header no-border">
-                <h5 class="card-title">{{ $post->title }}</h5>
-            </div>
-            <div class="card-body pt-0">
-                <div class="widget-49">
-                    <div class="widget-49-title-wrapper pt-1">
-                        <div class="widget-49-date-primary">
-                        <span class="widget-49-date-day">{{ \Carbon\Carbon::parse($post->date)->format('d') }}</span>
-                        <span class="widget-49-date-month">{{ \Carbon\Carbon::parse($post->date)->format('M') }}</span>
-                        </div>
-                        <div class="widget-49-meeting-info">
-                            <span class="widget-49-pro-title">{{ $post->subtitle }}</span>
-                            <span class="widget-49-meeting-time"></span>
-                        </div>
-                    </div>
-                    <ol class="widget-49-meeting-points">
-                      @if(!empty($post->subtitle))
-                        <li class="widget-49-meeting-item"><span>{{ $post->subtitle }}</span></li>
-                        @endif
-                        @if(!empty($post->subtitle))
-                        <li class="widget-49-meeting-item"><span>{{ $post->description  }}</span></li>
-                        @endif
-                       
-                    </ol>
-                    @if(file_exists(public_path($post->file)))
-                      <div class="widget-49-meeting-action">
-                          <a href="{{ asset($post->file) }}" class="btn btn-sm btn-flash-border-primary" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
-                      </div>
-                      @else
-                          <p></p>
-                      @endif
-                </div>
-            </div>
-        </div>
-    </div>
- @endforeach
-</div>
-</div>
-  </section>
-@endif
-    <!-- alternative section -->
-    <div class="container my-5">
+  <!-- alternative -->
+  <section class="alternative-section">
+          <!-- alternative section -->
+  <div class="container my-5">
       <div class="row align-items-center">
           <!-- Left column: Text -->
           <div class="col-md-6 order-md-1 order-1 text-center text-md-start" data-aos="fade-up">
@@ -244,6 +157,119 @@
           </div>
       </div> -->
         <!-- oldage donations -->
+
+
+  </section>
+<!-- end alternative -->
+
+  <!-- ========================================== Posts========================================== -->
+  @if(count($posts))
+<section class="comingup-events container pt-5 pb-5">
+  <div class="container pt-3 pb-3 text-center">
+    <h2 class="activity-text">Upcoming Events</h2>
+  </div>
+  <div class="swiper-container-wrapper" style="position: relative;">
+    <swiper-container 
+    navigation="true" 
+    space-between="20" 
+    speed="500" 
+    loop="true" 
+    css-mode="true" 
+    breakpoints='{
+        "320": {"slidesPerView": 1},
+        "640": {"slidesPerView": 2},
+        "1024": {"slidesPerView": 3}
+    }'>
+  @foreach($posts as $post)
+    <swiper-slide>
+        <div class="card card-margin" data-aos="zoom-in" data-aos-duration="2000">
+            <div class="card-header no-border">
+                <h5 class="card-title">{{ $post->title }}</h5>
+            </div>
+            <div class="card-body pt-0">
+                <div class="widget-49">
+                    <div class="widget-49-title-wrapper pt-1">
+                        <div class="widget-49-date-primary">
+                        <span class="widget-49-date-day">{{ \Carbon\Carbon::parse($post->date)->format('d') }}</span>
+                        <span class="widget-49-date-month">{{ \Carbon\Carbon::parse($post->date)->format('M') }}</span>
+                        </div>
+                        <div class="widget-49-meeting-info">
+                            <span class="widget-49-pro-title">{{ $post->subtitle }}</span>
+                            <span class="widget-49-meeting-time"></span>
+                        </div>
+                    </div>
+                    <ol class="widget-49-meeting-points">
+                      @if(!empty($post->subtitle))
+                        <li class="widget-49-meeting-item"><span>{{ $post->subtitle }}</span></li>
+                        @endif
+                        @if(!empty($post->subtitle))
+                        <li class="widget-49-meeting-item"><span>{{ $post->description  }}</span></li>
+                        @endif
+                       
+                    </ol>
+                    @if(file_exists(public_path($post->file)))
+                      <div class="widget-49-meeting-action">
+                          <a href="{{ asset($post->file) }}" class="btn btn-sm btn-flash-border-primary" target="_blank"><i class="bi bi-file-earmark-pdf"></i></a>
+                      </div>
+                      @else
+                          <p></p>
+                      @endif
+                </div>
+            </div>
+        </div>
+    </swiper-slide>
+ @endforeach
+
+</swiper-container>
+</div>
+
+  </section>
+@endif
+   <!-- ==========================================End Posts========================================== -->
+
+
+
+  <!-- album song -->
+  <section>
+  <div class="container" style="background-image: url('{{ asset('inpageimages/album-song-infant-jesus.jpg') }}'); background-size: cover; background-position: center; height: 400px; display: flex; align-items: center; justify-content: center; position: relative;">
+    <!-- Dark Overlay for Better Text Readability -->
+    <div class="overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5);"></div>
+
+    <!-- Content Area with Author Details and Play Icon -->
+    <div class="content text-center text-white" style="position: relative; z-index: 1;">
+        <!-- Author Information -->
+        <h4>Album Song</h4>
+        <h5>Written by Fr.David Koppara</h5>
+        <p>Brief description about the author goes here.</p>
+        
+        <!-- Play Button Icon -->
+        <button type="button" class="play-button btn btn-primary" data-bs-toggle="modal" data-bs-target="#videoModal">
+        <i class="bi bi-play-fill"></i>
+    </button>
+    </div>
+</div>
+
+    <!-- Video Modal -->
+    <div class="modal fade" id="videoModal" tabindex="-1" aria-labelledby="videoModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="videoModalLabel">Album Song Video</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="ratio ratio-16x9">
+                    <iframe width="560" height="315"  id="youtubeVideo"  src="" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
   <!-- start Teams -->
     <!-- Team 1 - Bootstrap Brain Component -->
 <section class="bg-light py-3 py-md-5 py-xl-8 mb-3">
@@ -294,9 +320,18 @@
     <h3 class="activity-text">Activities</h3>
   </div>
   <div class="swiper-container-wrapper" style="position: relative;">
-  <div class="swiper-button-prev"></div>
-<div class="swiper-button-next"></div>
-  <swiper-container init="false">
+      <swiper-container 
+        navigation="true" 
+        space-between="20" 
+        speed="500" 
+        loop="true" 
+        css-mode="true" 
+        breakpoints='{
+            "320": {"slidesPerView": 1},
+            "640": {"slidesPerView": 2},
+            "1024": {"slidesPerView": 4}
+        }'>
+
     <swiper-slide>
       <div class="col-lg-12 col-sm-12" data-aos="fade-left" data-aos-duration="3000">
         <div class="card m-2 activities" style="width: 100%;">

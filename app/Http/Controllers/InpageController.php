@@ -49,13 +49,14 @@ class InpageController extends Controller
         ->orderBy(DB::raw('YEAR(date)'), 'desc')
         ->orderBy(DB::raw('MONTH(date)'), 'desc')
         ->get();
- 
+        // dd($listdata);
          // Group the data by year and month for easier display in the view
          $groupedData = [];
  
          foreach ($listdata as $data) {
          $groupedData[$data->year][$data->month][] = $data; // Store full row data in array
          }
+        //  dd($groupedData);
          // dd($groupedData);
          return view('basefile.youtube', compact('groupedData'));
  }

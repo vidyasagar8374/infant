@@ -23,42 +23,7 @@ window.onscroll = function() {
     }
   };
   
-  const swiperEl = document.querySelector('swiper-container');
-
-  const swiperParams = {
-    slidesPerView: 1,
-    spaceBetween: 10,
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 10,
-      },
-      1024: {
-        slidesPerView: 4,
-        spaceBetween: 10,
-      },
-    },
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    on: {
-      init() {
-        console.log('Swiper initialized');
-      },
-    },
-  };
-  
-  Object.assign(swiperEl, swiperParams);
-  swiperEl.initialize();
-  
-  
-  
-
-  
-  
   // youtube card
-
 
 function togglePlay(playButton) {
   const video = playButton.previousElementSibling;
@@ -87,82 +52,12 @@ function togglePlay(playButton) {
 
   //  parish swiper
 
-    const swiperContainer = document.querySelector('.mySwiper');
 
-    const swiperParamsParish = {
-      
-      slidesPerView: 1,
-      spaceBetween: 10,
-      navigation: {
-        nextEl: '.swiper-button-next',
-        prevEl: '.swiper-button-prev',
-    },
-      breakpoints: {
-        640: {
-          slidesPerView: 2,
-          spaceBetween: 10,
-        },
-        1024: {
-          slidesPerView: 4,
-          spaceBetween: 10,
-        },
-      },
-    
-      on: {
-        init() {
-          console.log('Swiper initialized parish');
-        },
-      },
-    };
-    
-    // Assign parameters to the swiper element
-    Object.assign(swiperContainer, swiperParamsParish);
-    
-    // Initialize swiper manually
-    swiperContainer.initialize();
-
-
-
-  //  parish swiper
 
 
     
+
   
-  // youTubeSwiper
-    
-  const swiperContainerYoutube = document.querySelector('.youTubeSwiper');
-
-  const swiperParamYoutube = {
-    
-    slidesPerView: 1,
-    spaceBetween: 10,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-  },
-    breakpoints: {
-      640: {
-        slidesPerView: 2,
-        spaceBetween: 10,
-      },
-      1024: {
-        slidesPerView: 4,
-        spaceBetween: 10,
-      },
-    },
-  
-    on: {
-      init() {
-        console.log('Swiper initialized parish');
-      },
-    },
-  };
-  
-  // Assign parameters to the swiper element
-  Object.assign(swiperContainerYoutube, swiperParamYoutube);
-  
-  // Initialize swiper manually
-  swiperContainerYoutube.initialize();
   
   
   

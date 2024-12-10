@@ -24,15 +24,23 @@
                 </button>
             </h2>
             <!-- Accordion body: Display data for that month -->
-            <div id="collapse{{ $year }}{{ $month }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $year }}{{ $month }}" data-bs-parent="#accordionExample">
+            <div id="collapse{{ $year }}{{ $month }}" class="accordion-collapse collapse @if($loop->parent->first && $loop->first) show @endif" aria-labelledby="heading{{ $year }}{{ $month }}">
                 <div class="accordion-body">
                     <div class="swiper-container-wrapper" style="position: relative;">
-                        <div class="swiper-button-next"></div>
-                       <div class="swiper-button-prev"></div>
-                       <swiper-container init="false" class="youTubeSwiper">
+                            <swiper-container 
+                            navigation="true" 
+                            space-between="20" 
+                            speed="500" 
+                            loop="true" 
+                            css-mode="true" 
+                            breakpoints='{
+                                "320": {"slidesPerView": 1},
+                                "640": {"slidesPerView": 2},
+                                "1024": {"slidesPerView": 4}
+                            }'>
                         @foreach($data as $item)
                         <swiper-slide>
-                            <div class="card video-card">
+                            <div class="card video-card m-2">
                                 <div class="card-video-wrapper">
                                     <iframe
                                         src="https://www.youtube.com/embed/{{ $item->youtube_id }}"
@@ -58,10 +66,8 @@
                                 </div>
                             </div>
                         </swiper-slide>
-
-                     
                         @endforeach
-                    </swiper-container>
+                      </swiper-container>
                      </div>
                 </div>
             </div>
