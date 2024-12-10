@@ -223,14 +223,14 @@
 </swiper-container>
 </div>
 
-  </section>
+</section>
 @endif
    <!-- ==========================================End Posts========================================== -->
 
 
 
   <!-- album song -->
-  <section>
+  <section class="pt-5 pb-5">
   <div class="container" style="background-image: url('{{ asset('inpageimages/album-song-infant-jesus.jpg') }}'); background-size: cover; background-position: center; height: 400px; display: flex; align-items: center; justify-content: center; position: relative;">
     <!-- Dark Overlay for Better Text Readability -->
     <div class="overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background-color: rgba(0, 0, 0, 0.5);"></div>
@@ -272,18 +272,18 @@
 
   <!-- start Teams -->
     <!-- Team 1 - Bootstrap Brain Component -->
-<section class="bg-light py-3 py-md-5 py-xl-8 mb-3">
-  <div class="container">
-    <div class="row justify-content-md-center">
+<section class="pt-3 pb-3">
+  <div class="container bg-light">
+    <div class="row justify-content-md-center pt-5 pb-5">
       <div class="col-12 col-md-10 col-lg-8 col-xl-7 col-xxl-6">
         <h2 class="mb-4 display-5 text-center">Diocese Priests</h2>
         <p class="text-secondary mb-5 text-center lead fs-4">We are a group of innovative, experienced, and proficient teams. You will love to collaborate with us.</p>
         <hr class="w-50 mx-auto mb-5 mb-xl-9 border-dark-subtle">
       </div>
     </div>
-  </div>
 
-  <div class="container overflow-hidden infantparish">
+
+  <div class="container overflow-hidden infantparish pb-5">
     <div class="row gy-4 gy-lg-0 gx-xxl-5">
       @foreach($parishlists as $parishlist)
       <div class="col-12 col-md-6 col-lg-3">
@@ -311,6 +311,8 @@
       </div>
       @endforeach
     </div>
+  </div>
+
   </div>
 </section>
   <!-- Ends  Teams -->
