@@ -417,7 +417,7 @@
       <div class="container transport-system">
       <div class="row">
     <!-- Main Column with two inner columns for Train and Bus -->
-    <div class="col-md-6">
+    <div class="col-lg-6 col-xl-6 col-md-12">
       <div class="row">
         <!-- Train Column -->
         <div class="col-md-6">

@@ -551,7 +551,38 @@ em {
   object-position: 4px 2%;
 }
 
+/* .carousel-caption {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.5), rgba(255, 255, 255, 0.2));
+  backdrop-filter: blur(10px);
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+} */
 
+
+@media (max-width: 767px) {
+  .carousel-caption {
+    position: relative;
+    left: 0px;
+    display: block;
+    color: black;
+    text-align: start;
+    /* Show on mobile and smaller screens */
+    /* Add your styles for mobile and smaller screens here */
+  }
+  .transport-system {
+    position:relative;
+    top: 10px;
+}
+
+}
+
+
+@media only screen and (max-width: 768px) {
+    .transport-system {
+      position: relative;
+      top: 0px;
+  }
+  }
 
 
 
