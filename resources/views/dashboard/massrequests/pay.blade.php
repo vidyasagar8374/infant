@@ -9,7 +9,7 @@
         "order_id": "{{ $order_id }}", // Razorpay Order ID
         "handler": function (response) {
            console.log(response);
-        //    debugger;
+               //    debugger;
             // AJAX request to call the payments.callback route
             fetch("{{ route('payments.callback') }}", {
                 method: "POST",

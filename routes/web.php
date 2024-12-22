@@ -6,12 +6,20 @@ use App\Http\Controllers\adminController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\InpageController;
 use App\Http\Controllers\PaymentController;
+use Illuminate\Support\Facades\Artisan;
 
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('/clear-cache', function() {
+    Artisan::call('cache:clear');
+    Artisan::call('route:clear');
+    Artisan::call('config:clear');
+    Artisan::call('view:clear');
+    return "Cache Cleared Successfully!";
+});
 Route::post('/payments/initiate', [PaymentController::class, 'initiatePayment'])->name('payments.initiate');
-Route::post('/payments/callback', [PaymentController::class, 'handleCallback'])->name('payments.callback');
+Route::any('/payments/callback', [PaymentController::class, 'handleCallback'])->name('payments.callback');
 Route::post('/payments/webhookhandler', [PaymentController::class, 'webhookhandler'])->name('payments.webhookhandler');
 
 Route::controller(InpageController::class)->group(function(){
