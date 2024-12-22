@@ -5,6 +5,7 @@ use App\Models\PaymentReference;
 use Razorpay\Api\Api;
 
 
+
 class PaymentController extends Controller
 {
     public function initiatePayment(Request $request)
@@ -41,28 +42,46 @@ class PaymentController extends Controller
         ]);
     }
     public function handleCallback(Request $request)
-        {
-            $signature = $request->razorpay_signature;
-            $payload = $request->getContent();
-            // dd($signature, $payload);
-            $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
-            try {
-                $api->utility->verifyWebhookSignature($payload, $signature, env('RAZORPAY_WEBHOOK_SECRET'));
-                $data = json_decode($payload, true);
-                $referenceId = $data['payload']['payment']['entity']['receipt'];
-                $paymentReference = PaymentReference::where('reference_id', $referenceId)->first();
-                if ($paymentReference) {
-                    if($paymentReference->status != 'completed'){
-                        $paymentReference->update([
-                            'status' => 'completed',
-                        ]);
-                    }
-                    return response()->json(['success' => true]);
-                }
-            } catch (\Exception $e) {
-                return response()->json(['error' => $e->getMessage()], 400);
+    {
+        $signature = $request->header('X-Razorpay-Signature'); // Razorpay signature header
+        $payload = $request->getContent(); // Raw webhook payload
+        $webhookSecret = env('RAZORPAY_WEBHOOK_SECRET'); // Webhook secret from environment
+    
+        try {
+            // Manually verify the webhook signature
+            $expectedSignature = hash_hmac('sha256', $payload, $webhookSecret);
+            if (!hash_equals($expectedSignature, $signature)) {
+                throw new \Exception('Signature verification failed');
             }
+    
+            // Decode the payload to access event details
+            $data = json_decode($payload, true);
+    
+            // Extract reference ID from the payload
+            $referenceId = $data['payload']['payment']['entity']['receipt'];
+    
+            // Find the payment reference in the database
+            $paymentReference = PaymentReference::where('reference_id', $referenceId)->first();
+    
+            if ($paymentReference) {
+                // Check if the status is not already 'completed'
+                if ($paymentReference->status != 'completed') {
+                    $paymentReference->update([
+                        'status' => 'completed',
+                    ]);
+                }
+                return response()->json(['success' => true]);
+            } else {
+                // Log or handle the case where no matching reference is found
+                return response()->json(['error' => 'Payment reference not found'], 404);
+            }
+    
+        } catch (\Exception $e) {
+            // Log the error message for debugging
+            \Log::error('Webhook processing error: ' . $e->getMessage());
+            return response()->json(['error' => $e->getMessage()], 400);
         }
+    }
     public function webhookhandler(Request $request)
     {
          
