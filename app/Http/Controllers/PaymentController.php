@@ -34,6 +34,12 @@ class PaymentController extends Controller
             'status' => 'pending',
             'meta_data' => json_encode(['order_id' => $order->id]),
         ]);
+        if($paymentReference){
+            \Log::info('Reference Id created ' . $referenceId);
+        }else{
+            \Log::info('Reference Id not created ' . $referenceId);
+        }
+        // dd($paymentReference);
 
         return view('dashboard.massrequests.pay', [
             'order_id' => $order->id,
@@ -43,28 +49,35 @@ class PaymentController extends Controller
     }
     public function handleCallback(Request $request)
     {
-        $signature = $request->header('X-Razorpay-Signature'); // Razorpay signature header
-        $payload = $request->getContent(); // Raw webhook payload
-        $webhookSecret = env('RAZORPAY_WEBHOOK_SECRET'); // Webhook secret from environment
+        // Get raw payload and signature
+        $payload = $request->getContent();
+        $signature = $request->razorpay_signature;
+        $webhookSecret = env('RAZORPAY_WEBHOOK_SECRET');
+        $razorpayOrderId = $request->input('razorpay_order_id');
+        $razorpayPaymentId = $request->input('razorpay_payment_id');
+        $customerReferenceId = $request->input('custom_reference_id');
+        $generatedString = $razorpayOrderId . '|' . $razorpayPaymentId;
     
         try {
-            // Manually verify the webhook signature
-            $expectedSignature = hash_hmac('sha256', $payload, $webhookSecret);
+            $data = json_decode($payload, true);
+            // Calculate the expected signature
+            $expectedSignature = hash_hmac('sha256', $generatedString, $webhookSecret);
+            // e0de2f1ae337ac8f5f5afb81c523d70798d899e45a5d38b30b4f48a5a714ff6a
+            // Log for debugging
+           
+            \Log::info('Generated String: ' . $generatedString);
+            \Log::info('Expected Signature: ' . $expectedSignature);
+            \Log::info('Received Signature: ' . $signature);
+    
+            // Compare the signatures
             if (!hash_equals($expectedSignature, $signature)) {
                 throw new \Exception('Signature verification failed');
             }
-    
-            // Decode the payload to access event details
-            $data = json_decode($payload, true);
-    
-            // Extract reference ID from the payload
-            $referenceId = $data['payload']['payment']['entity']['receipt'];
-    
-            // Find the payment reference in the database
+            // Decode the payload and process further
+            $referenceId = $customerReferenceId;
             $paymentReference = PaymentReference::where('reference_id', $referenceId)->first();
     
             if ($paymentReference) {
-                // Check if the status is not already 'completed'
                 if ($paymentReference->status != 'completed') {
                     $paymentReference->update([
                         'status' => 'completed',
@@ -72,16 +85,15 @@ class PaymentController extends Controller
                 }
                 return response()->json(['success' => true]);
             } else {
-                // Log or handle the case where no matching reference is found
                 return response()->json(['error' => 'Payment reference not found'], 404);
             }
     
         } catch (\Exception $e) {
-            // Log the error message for debugging
             \Log::error('Webhook processing error: ' . $e->getMessage());
             return response()->json(['error' => $e->getMessage()], 400);
         }
     }
+    
     public function webhookhandler(Request $request)
     {
          
@@ -102,7 +114,7 @@ class PaymentController extends Controller
             // Extract event type and relevant data
             $eventType = $data['event'];
             $paymentEntity = $data['payload']['payment']['entity'];
-
+            
             // Call the handler based on the event type
             switch ($eventType) {
                 case 'payment.captured':
