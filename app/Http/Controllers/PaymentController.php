@@ -116,11 +116,11 @@ class PaymentController extends Controller
             // Call the handler based on the event type
             switch ($eventType) {
                 case 'order.paid':
-                    $this->updatePaymentStatus($payload,$paymentEntity, 'completed');
+                    $this->updatePaymentStatus($data,$paymentEntity, 'completed');
                     break;
 
                 case 'payment.failed':
-                    $this->updatePaymentStatus($payload,$paymentEntity, 'failed');
+                    $this->updatePaymentStatus($data,$paymentEntity, 'failed');
                     break;
 
                 default:
@@ -143,7 +143,7 @@ class PaymentController extends Controller
      * @param string $status
      * @return void
      */
-    private function updatePaymentStatus($payload,$paymentEntity, $status)
+    private function updatePaymentStatus($data,$paymentEntity, $status)
     {
         $referenceId = $paymentEntity['order_id']; // Assuming your order_id maps to your reference ID
         $paymentReference = PaymentReference::where('meta_data', $referenceId)->first();
@@ -152,7 +152,7 @@ class PaymentController extends Controller
             if($paymentReference->status != 'completed'){
                 $paymentReference->update([
                     'status' =>$status,
-                    'payment_reference' => $payload
+                    'payment_reference' => $data
                 ]);
             }
             \Log::info("Payment status updated to {$status} for reference ID {$referenceId}.");
