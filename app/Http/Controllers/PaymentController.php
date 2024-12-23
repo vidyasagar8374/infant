@@ -33,7 +33,7 @@ class PaymentController extends Controller
             'user_id' => auth()->id(), // Assuming user authentication
             'amount' => $amount,
             'status' => 'pending',
-            'meta_data' => json_encode(['order_id' => $order->id]),
+            'meta_data' =>$order->id,
         ]);
         if($paymentReference){
             \Log::info('Reference Id created ' . $referenceId);
@@ -116,11 +116,11 @@ class PaymentController extends Controller
             // Call the handler based on the event type
             switch ($eventType) {
                 case 'payment.captured':
-                    $this->updatePaymentStatus($paymentEntity, 'completed');
+                    $this->updatePaymentStatus($payload,$paymentEntity, 'completed');
                     break;
 
                 case 'payment.failed':
-                    $this->updatePaymentStatus($paymentEntity, 'failed');
+                    $this->updatePaymentStatus($payload,$paymentEntity, 'failed');
                     break;
 
                 default:
@@ -143,15 +143,16 @@ class PaymentController extends Controller
      * @param string $status
      * @return void
      */
-    private function updatePaymentStatus($paymentEntity, $status)
+    private function updatePaymentStatus($payload,$paymentEntity, $status)
     {
         $referenceId = $paymentEntity['order_id']; // Assuming your order_id maps to your reference ID
-        $paymentReference = PaymentReference::where('reference_id', $referenceId)->first();
+        $paymentReference = PaymentReference::where('meta_data', $referenceId)->first();
 
         if ($paymentReference) {
             if($paymentReference->status != 'completed'){
                 $paymentReference->update([
-                    'status' => 'completed',
+                    'status' =>$status,
+                    'payment_reference' => $payload
                 ]);
             }
             \Log::info("Payment status updated to {$status} for reference ID {$referenceId}.");
