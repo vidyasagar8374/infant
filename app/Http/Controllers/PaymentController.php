@@ -93,13 +93,14 @@ class PaymentController extends Controller
     }
     
     public function webhookhandler(Request $request)
-    {
-         
-        $payload = $request->all(); // Raw webhook payload
+    { 
+        $payload = $request->getContent(); // Raw webhook payload
         $razorpaySignature = $request->header('X-Razorpay-Signature'); // Webhook signature header
         $webhookSecret = env('RAZORPAY_WEBHOOK_SECRET');
-        dd($razorpaySignature, $webhookSecret);
-        // added new chagnes
+          \Log::info('webhook generatered payload signature');
+          \Log::info('webhook signer' . $razorpaySignature);
+          \Log::info($payload);
+           
         try {
             // Verify the webhook signature
             $api = new Api(env('RAZORPAY_KEY'), env('RAZORPAY_SECRET'));
