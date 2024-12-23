@@ -8,9 +8,7 @@
         "name": "Your App Name",
         "description": "Payment for Order {{ $reference_id }}",
         "order_id": "{{ $order_id }}", // Razorpay Order ID
-        "handler": function (response) {
-          
-           console.log(response);
+        "handler": function (response) {           
                //    debugger;
             // AJAX request to call the payments.callback route
             fetch("{{ route('payments.callback') }}", {

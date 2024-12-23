@@ -25,6 +25,7 @@ class PaymentController extends Controller
             'amount' => $amount * 100, // Amount in paise
             'currency' => 'INR',
         ]);
+        \Log::info(' Before Payment Order created ' . $order->id);
 
         // Store the reference in the database
         $paymentReference = PaymentReference::create([
@@ -39,7 +40,7 @@ class PaymentController extends Controller
         }else{
             \Log::info('Reference Id not created ' . $referenceId);
         }
-        // dd($paymentReference);
+
 
         return view('dashboard.massrequests.pay', [
             'order_id' => $order->id,
@@ -57,17 +58,14 @@ class PaymentController extends Controller
         $razorpayPaymentId = $request->input('razorpay_payment_id');
         $customerReferenceId = $request->input('custom_reference_id');
         $generatedString = $razorpayOrderId . '|' . $razorpayPaymentId;
-    
+        \Log::info('after payment order id ' . $razorpayOrderId);
         try {
             $data = json_decode($payload, true);
             // Calculate the expected signature
             $expectedSignature = hash_hmac('sha256', $generatedString, $webhookSecret);
-            // e0de2f1ae337ac8f5f5afb81c523d70798d899e45a5d38b30b4f48a5a714ff6a
-            // Log for debugging
-           
-            \Log::info('Generated String: ' . $generatedString);
-            \Log::info('Expected Signature: ' . $expectedSignature);
-            \Log::info('Received Signature: ' . $signature);
+            // \Log::info('Generated String: ' . $generatedString);
+            // \Log::info('Expected Signature: ' . $expectedSignature);
+            // \Log::info('Received Signature: ' . $signature);
     
             // Compare the signatures
             if (!hash_equals($expectedSignature, $signature)) {
@@ -97,11 +95,10 @@ class PaymentController extends Controller
     public function webhookhandler(Request $request)
     {
          
-        $payload = $request->getContent(); // Raw webhook payload
+        $payload = $request->all(); // Raw webhook payload
         $razorpaySignature = $request->header('X-Razorpay-Signature'); // Webhook signature header
-        
         $webhookSecret = env('RAZORPAY_WEBHOOK_SECRET');
-
+        dd($razorpaySignature, $webhookSecret);
         // added new chagnes
         try {
             // Verify the webhook signature
