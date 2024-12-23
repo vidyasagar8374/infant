@@ -115,7 +115,7 @@ class PaymentController extends Controller
             
             // Call the handler based on the event type
             switch ($eventType) {
-                case 'payment.captured':
+                case 'order.paid':
                     $this->updatePaymentStatus($payload,$paymentEntity, 'completed');
                     break;
 
