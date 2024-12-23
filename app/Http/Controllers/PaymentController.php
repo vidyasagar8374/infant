@@ -117,11 +117,11 @@ class PaymentController extends Controller
             switch ($eventType) {
                 case 'order.paid' :
                 case'payment.captured' :
-                    $this->updatePaymentStatus($data,$paymentEntity, 'completed');
+                    $this->updatePaymentStatus($data,$paymentEntity,'completed');
                     break;
 
                 case 'payment.failed':
-                    $this->updatePaymentStatus($data,$paymentEntity, 'failed');
+                    $this->updatePaymentStatus($data,$paymentEntity,'failed');
                     break;
 
                 default:
@@ -156,9 +156,9 @@ class PaymentController extends Controller
                     'payment_reference' => $data
                 ]);
             }
-            \Log::info("Payment status updated to {$status} for reference ID {$referenceId}.");
+            \Log::info("Payment status updated to {$status} for reference ID {$data}.");
         } else {
-            \Log::warning("Payment reference not found for order ID: {$referenceId}.");
+            \Log::warning("Payment reference not found for order ID: {$data}.");
         }
     }
         

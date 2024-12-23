@@ -8,6 +8,6 @@ class PaymentReference extends Model
 {
     //
     protected $fillable = [
-        'reference_id', 'user_id', 'status', 'amount', 'meta_data'
+        'reference_id', 'user_id', 'status', 'amount', 'meta_data','payment_reference'
     ];
 }
