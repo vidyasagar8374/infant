@@ -98,7 +98,6 @@
                     space-between="20" 
                     speed="500" 
                     loop="true" 
-                    css-mode="true" 
                     breakpoints='{
                         "320": {"slidesPerView": 1},
                         "640": {"slidesPerView": 2},
