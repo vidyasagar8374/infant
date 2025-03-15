@@ -209,8 +209,8 @@ class adminController extends Controller
 
       // get posts
       public function getposts(){
-        $postslists = Post::where('is_active', 1)->paginate(8);
-        return view('dashboard.posts.postslist', compact('postslists'));
+        $posts = Post::where('is_active', 1)->paginate(8);
+        return view('dashboard.posts.postslist', compact('posts'));
     }
     public function viewpost(Request $request){
         $id = $request->id;
